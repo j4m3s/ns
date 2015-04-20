@@ -1,4 +1,4 @@
-;(function(undefined) {
+;(function(window, exports, undefined) { "use strict";
 
 var
 	goQueue = [],
@@ -87,8 +87,27 @@ function go(callback) {
 	document.addEventListener("DOMContentLoaded", goCallback);
 }
 
-// Attach the two main functions to global scope.
-window.ns = ns;
-window.go = go;
+// Attach the two main functions to exports object.
+// Read http://wiki.commonjs.org/wiki/Modules/1.1.1 for information on the use
+// of `exports` object.
+exports.ns = ns;
+exports.go = go;
 
-})();
+// Attach all exported variables to the global scope, if in the context of
+// a browser.
+(function(w) {
+	var
+		e
+	$$;
+
+	for(e in exports) {
+		if(!exports.hasOwnProperty()) {
+			continue;
+		}
+
+		w[e] = exports[e];
+	}
+})(window);
+
+})(typeof window  !== "undefined" ? window  : {},
+   typeof exports !== "undefined" ? exports : {});
