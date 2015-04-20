@@ -1,0 +1,2 @@
+# ns
+JavaScript namespace tool
