@@ -11,7 +11,15 @@ $$;
  * execute.
  */
 function goCallback() {
+	if(document.readyState !== "complete"
+	&& document.readyState !== "interactive") {
+		return;
+	}
 
+	while(goQueue.length > 0) {
+		// Shift the element from the start of the array, and call it.
+		goQueue.shift().call(window);
+	}
 }
 
 /**
