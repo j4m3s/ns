@@ -1,0 +1,26 @@
+{
+  "name": "ns",
+  "version": "0.0.1",
+  "homepage": "https://github.com/g105b/ns",
+  "authors": [
+    "Greg Bowler <greg.bowler@g105b.com>"
+  ],
+  "description": "JavaScript module system",
+  "main": "src/ns.js",
+  "keywords": [
+    "javascript",
+    "module",
+    "namespace",
+    "namespacing",
+    "modular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "ns.sublime-*"
+  ]
+}
