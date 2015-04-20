@@ -5,7 +5,7 @@
   "authors": [
     "Greg Bowler <greg.bowler@g105b.com>"
   ],
-  "description": "JavaScript module system",
+  "description": "JavaScript namespace tool",
   "main": "src/ns.js",
   "keywords": [
     "javascript",
