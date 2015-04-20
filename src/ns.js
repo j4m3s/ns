@@ -20,9 +20,31 @@ function goCallback() {
  *
  * @param {String} namespace A dot-separated namespace to house the attachment
  * @param {Function|Object} attachment The object to attach to the namespace
+ *
+ * @return {Object} Returns the attached object
  */
 function ns(namespace, attachment) {
+	var
+		partArray = namespace.split("."),
+		current = window,
+		i, len,
+	$$;
 
+	// Loop through the provided namespace, initialising undefined elements.
+	for(i = 0, len = partArray.length; i < len; i++) {
+		if(current[partArray[i]] === undefined) {
+			if(i === len) {
+				current[partArray[i]] = attachment;
+			}
+			else {
+				current[partArray[i]] = {};
+			}
+		}
+
+		current = current[partArray[i]];
+	}
+
+	return current;
 }
 
 /**
