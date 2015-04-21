@@ -65,12 +65,23 @@ test("Go callbacks executed in order", function(t) {
 	t.end();
 });
 
-test("Namespace attaches to window", function(t) {
+test("Namespace attaches to window, no nesting", function(t) {
 	var
 		msg = "This is the message",
 		el = ns.ns("Base", {msg: msg}),
 	$$;
 
 	t.equal(el.Base.msg, msg);
+	t.end();
+});
+
+test("Namespace attaches to window, deep nesting", function(t) {
+	var
+		msg = "This is the nested message",
+		fullNamespace = "Base.One.Two.Three.DeepObject",
+		el = ns.ns(fullNamespace, {msg: msg}),
+	$$;
+
+	t.equal(Base.One.Two.Three.DeepObject.msg, msg);
 	t.end();
 });
