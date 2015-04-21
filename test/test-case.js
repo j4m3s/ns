@@ -64,3 +64,13 @@ test("Go callbacks executed in order", function(t) {
 
 	t.end();
 });
+
+test("Namespace attaches to window", function(t) {
+	var
+		msg = "This is the message",
+		el = ns.ns("Base", {msg: msg}),
+	$$;
+
+	t.equal(el.Base.msg, msg);
+	t.end();
+});

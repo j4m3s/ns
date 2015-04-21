@@ -31,31 +31,34 @@ function goCallback() {
  *
  * @param {String} namespace A dot-separated namespace to house the attachment
  * @param {Function|Object} attachment The object to attach to the namespace
+ * @param {Object} [base] Optional base object to attach to. Leave undefined to
+ * use window.
  *
- * @return {Object} Returns the attached object
+ * @return {Object} Returns the base
  */
-function ns(namespace, attachment) {
+function ns(namespace, attachment, base) {
 	var
 		partArray = namespace.split("."),
-		current = window,
+		base = base || window,
+		current = base,
 		i, len,
 	$$;
 
 	// Loop through the provided namespace, initialising undefined elements.
 	for(i = 0, len = partArray.length; i < len; i++) {
 		if(current[partArray[i]] === undefined) {
-			if(i === len) {
+			// if(i === len) {
 				current[partArray[i]] = attachment;
-			}
-			else {
-				current[partArray[i]] = {};
-			}
+			// }
+			// else {
+			// 	current[partArray[i]] = {};
+			// }
 		}
 
 		current = current[partArray[i]];
 	}
 
-	return current;
+	return window;
 }
 
 /**
