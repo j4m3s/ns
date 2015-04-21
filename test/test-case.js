@@ -1,6 +1,8 @@
-// console.log(require);
-var test = require("tape");
-var ns = require("../src/ns");
+"use strict";
+var
+	test = require("tape"),
+	ns = require("../src/ns"),
+$$;
 
 test("Load ns", function(t) {
 	var
@@ -16,6 +18,29 @@ test("Load ns", function(t) {
 	}
 
 	t.equal(expectedProperties.length, count);
+
+	t.end();
+});
+
+test("Go callbacks executed in order, array style", function(t) {
+	var
+		counter = 0,
+		func1 = function() {
+			counter += 1;
+		},
+		func2 = function() {
+			counter += 2;
+		},
+		cb,
+	$$;
+
+	// Attach func1 and func2 to go function at the same time (array syntax).
+	cb = ns.go([func1, func2]);
+
+	// Trigger goCallback.
+	cb();
+
+	t.equal(counter, 3, "Go callback invoke counter");
 
 	t.end();
 });

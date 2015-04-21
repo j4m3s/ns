@@ -2,6 +2,7 @@
 
 var
 	goQueue = [],
+	document = typeof window.document !== "undefined" ? window.document : {},
 $$;
 
 /**
@@ -11,10 +12,12 @@ $$;
  * execute.
  */
 function goCallback() {
-	if(document.readyState !== "complete"
+	if(typeof document.readyState !== "undefined"
+	&& document.readyState !== "complete"
 	&& document.readyState !== "interactive") {
 		return;
 	}
+
 
 	while(goQueue.length > 0) {
 		// Shift the element from the start of the array, and call it.
@@ -61,6 +64,9 @@ function ns(namespace, attachment) {
  *
  * @param {function|array} callback Single function or array of functions to
  * execute when DOM has loaded
+ *
+ * @return {function} The goCallback function that will be called when
+ * DOMContentLoaded fires
  */
 function go(callback) {
 	var
@@ -84,7 +90,11 @@ function go(callback) {
 		goQueue.push(callbackArray[i]);
 	}
 
-	document.addEventListener("DOMContentLoaded", goCallback);
+	if(document.addEventListener) {
+		document.addEventListener("DOMContentLoaded", goCallback);
+	}
+
+	return goCallback;
 }
 
 // Attach the two main functions to exports object.
@@ -109,5 +119,5 @@ exports.go = go;
 	}
 })(window);
 
-})(typeof window  !== "undefined" ? window  : {},
-   typeof exports !== "undefined" ? exports : {});
+})(typeof window   !== "undefined" ? window   : {},
+   typeof exports  !== "undefined" ? exports  : {});
