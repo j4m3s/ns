@@ -5,6 +5,55 @@ JavaScript namespace tool
 ![Travis-CI](https://img.shields.io/travis/joyent/node.svg?style=flat-square)
 ![Bower](https://img.shields.io/bower/v/ns.svg?style=flat-square)
 
+## Features
+
+ns provides two simple but useful features:
+
+### 1. Easy namespacing with automatic nested initialisation:
+
+```js
+// Assigns the function to window.MyApp.Security.authenticate.
+// NOTE: window.MyApp and may not be initialised yet.
+ns("MyApp.Security.authenticate", function(username, password) { /* .. */ } );
+
+// Assigns the object to window.MyApp.Security.credentials.
+// NOTE: Existing assignments within the namespace are kept.
+ns("MyApp.Security.credentials", {username: "g105b", password: "s3cr3t123"});
+
+// Shorthand nested namespaces for less typing:
+var sec = MyApp.Security;
+// Pass the credentials to the authentication function:
+sec.authenticate(sec.credentials.username, sec.credentials.password);
+```
+
+### 2. Simple document-ready callback for modern browsers:
+
+```js
+// Show the alert when the DOMContentReady event fires:
+go(function() { alert("DOM is loaded!"); });
+
+// Assign your namespaced function to load on DOMContentReady:
+go(MyApp.UI.init);
+
+// Assign multiple callbacks one after another, like this:
+go(MyApp.UI.enhance);
+go(MyApp.Forms.validate);
+go(function() { console.log("DOM loaded!"); });
+
+// Or assign them as an array:
+go([
+    MyApp.UI.enhance,
+    MyApp.Forms.validate,
+    function() {
+        console.log("DOM loaded!");
+    },
+]);
+
+// If you want to trigger the callback manually:
+var callback = go(myFunc);
+callback();
+```
+
 ## Testing
 
 Tests are written using [tape][tape-github] and can be run using [Node][node-website] like this:
