@@ -2,8 +2,8 @@
 
 JavaScript namespace tool
 
-![Travis-CI](https://img.shields.io/travis/joyent/node.svg?style=flat-square)
-![Bower](https://img.shields.io/bower/v/ns.svg?style=flat-square)
+[![Travis-CI][shield-travis-ci]][travid-ci]
+[![Bower][shield-bower]][bower]
 
 ## Features
 
@@ -65,3 +65,9 @@ node test/test-case.js
 
 [tape-github]: https://github.com/substack/tape
 [node-website]: https://nodejs.org
+
+[shield-travis-ci]: https://img.shields.io/travis/g105b/ns.svg?style=flat-square
+[shield-bower]: https://img.shields.io/bower/v/ns.svg?style=flat-square
+
+[travis-ci]: https://travis-ci.org/g105b/ns
+[bower]: http://bower.io/search/?q=ns
