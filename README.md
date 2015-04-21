@@ -2,7 +2,7 @@
 
 JavaScript namespace tool
 
-[![Travis-CI][shield-travis-ci]][travid-ci]
+[![Travis-CI][shield-travis-ci]][travis-ci]
 [![Bower][shield-bower]][bower]
 
 ## Features
