@@ -3,7 +3,8 @@ machine:
     version: 0.10.22
 
 dependencies:
-  - npm install tape
+  pre:
+    - npm install tape
 
 test:
   override:
