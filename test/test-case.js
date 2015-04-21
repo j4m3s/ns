@@ -22,6 +22,30 @@ test("Load ns", function(t) {
 	t.end();
 });
 
+test("Go callbacks executed in order, multiple push", function(t) {
+	var
+		counter = 0,
+		func1 = function() {
+			counter += 1;
+		},
+		func2 = function() {
+			counter += 2;
+		},
+		cb,
+	$$;
+
+	// Attach func1 and func2 to go function, one at a time.
+	ns.go(func1);
+	cb = ns.go(func2);
+
+	// Trigger callback.
+	cb();
+
+	t.equal(counter, 3, "Go callback invoke counter");
+
+	t.end();
+});
+
 test("Go callbacks executed in order, array style", function(t) {
 	var
 		counter = 0,
